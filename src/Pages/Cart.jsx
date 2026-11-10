@@ -2,9 +2,11 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
-
+import Header from '../Components/Header'
 function Cart() {
   return (
+    <>
+    <Header/>
     <div style={{height:"80vh"}} className='container my-5'>
        <h1 className='pt-5 text-primary fw-bold'>User's Cart</h1>
       <div className='row'>
@@ -56,6 +58,7 @@ function Cart() {
 
       </div>
     </div>
+    </>
   )
 }
 

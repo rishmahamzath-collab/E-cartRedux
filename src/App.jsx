@@ -4,7 +4,7 @@ import View from './Pages/View'
 import Wishlist from './Pages/Wishlist'
 import Cart from './Pages/Cart'
 import PageNotFound from './Pages/PageNotFound'
-import Header from './Components/Header'
+
 import Footer from './Components/Footer'
 import Products from './Pages/Products'
 
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-    <Header/>
+    
      <Routes>
       <Route path='/' element={<Products/>}/>
       <Route path='/products/:id' element={<View/>}/>
