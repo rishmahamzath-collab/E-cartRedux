@@ -12,6 +12,7 @@ import { searchProduct } from '../redux/slices/productSlice';
 
 function Header({insideProduct}) {
   const userwishlist = useSelector(state=>state.WishlistReducer)
+  const usercart = useSelector(state=>state.CartReducer)
   const dispatch = useDispatch()
 
   return (
@@ -25,7 +26,7 @@ function Header({insideProduct}) {
               <input onChange={e=>dispatch(searchProduct(e.target.value))} type="text" className='form control' placeholder='Search your products' />
             </Nav.Item>}
             <Link to={'/wishlist'} className='text-light text-decoration-none fw-bold ms-5'> <FontAwesomeIcon icon={faHeart}   className='fw-bold fs-4 text-danger' />Wishlist    <Badge bg="secondary">{userwishlist?.length}</Badge></Link>
-            <Link to={'/cart'} className='text-light text-decoration-none fw-bold ms-5'> <FontAwesomeIcon icon = {faCartPlus} className='fw-bold fs-4 text-success' />   Cart <Badge bg="secondary">10</Badge></Link>
+            <Link to={'/cart'} className='text-light text-decoration-none fw-bold ms-5'> <FontAwesomeIcon icon = {faCartPlus} className='fw-bold fs-4 text-success' />   Cart <Badge bg="secondary">{usercart?.length}</Badge></Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

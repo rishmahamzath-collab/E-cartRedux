@@ -5,10 +5,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartCircleXmark } from '@fortawesome/free-solid-svg-icons/faHeartCircleXmark';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import Header from '../Components/Header'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { removewishlistitem } from '../redux/slices/wishlistSlice';
+import Swal from 'sweetalert2'
+import { addcart } from '../redux/slices/cartSlice'
+
 
 function Wishlist() {
   const userwishlist = useSelector(state => state.WishlistReducer)
+  const dispatch = useDispatch()
+  const usercart = useSelector(state=>state.CartReducer)
+
+
+  
+   const handleCart = (product)=>{
+    //check the product already in the cart
+    const existingitem =usercart?.find(item=>item?.id == product?.id)
+    dispatch(addcart(product))
+    dispatch(removewishlistitem(product.id))
+    Swal.fire({
+      title: "Success",
+      text: existingitem? `${existingitem.title} quantity incremented` : "Product added in to your cart",
+      icon: "Success",
+      confirmButtonText: "ok" 
+    })
+   }
+
+
   return (
 
     <>
@@ -29,8 +52,8 @@ function Wishlist() {
               <Card.Body className='text-center' >
                 <Card.Title>{item?.title}</Card.Title>
                 <div className='d-flex justify-content-evenly '>
-                  <button className='btn text-danger fw-bold fs-3'><FontAwesomeIcon icon={faHeartCircleXmark} /></button>
-                  <button className='btn text-success fw-bold fs-3'><FontAwesomeIcon icon={faCartPlus} /></button>
+                  <button onClick={()=>dispatch(removewishlistitem(item?.id))} className='btn text-danger fw-bold fs-3'><FontAwesomeIcon icon={faHeartCircleXmark} /></button>
+                  <button onClick={()=>handleCart(item)} className='btn text-success fw-bold fs-3'><FontAwesomeIcon icon={faCartPlus} /></button>
                 </div>
               </Card.Body>
             </Card>
